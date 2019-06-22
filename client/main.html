@@ -1,0 +1,47 @@
+<head>
+  <title>UruChat</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="card">
+      <h5 class="card-header">Here the name of the other person</h5>
+      <div class="card-body">
+        <div style="height: 50vh;">
+          {{#if currentUser}}
+          <div class="overflow-auto">
+            {{> chatBody}}
+            </div>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+    {{> loginButtons}}
+  </div>
+
+</body>
+
+
+<template name="chat">
+  {{> Received}}
+  {{> chatInput}}
+</template>
+
+<template name="chatBody">
+
+    {{#each messages}}
+      <p>{{username}} : {{text}}</p>
+    {{/each}}
+
+  {{> chatInput}}
+</template>
+
+<template name="chatInput">
+  <form class="writeMessageForm form-inline">
+    <div class="form-group mx-sm-3 mb-2">
+      <input type="text" name="writeMessageInput" class="form-control " aria-describedby="enterMessage"
+        placeholder="Write your message" />
+    </div>
+    <button type="submit" class="btn btn-primary mb-2">Send</button>
+  </form>
+</template>
