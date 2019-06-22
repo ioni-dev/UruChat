@@ -5,16 +5,15 @@
 <body>
   <div class="container">
     <div class="card">
-      <h5 class="card-header">Here the name of the other person</h5>
-      <div class="card-body">
+      <h5 class="card-header">{{username}}Here the name of the other person</h5>
+      <div class="card-body overflow-auto">
+        {{#if currentUser}}
         <div style="height: 50vh;">
-          {{#if currentUser}}
-          <div class="overflow-auto">
             {{> chatBody}}
-            </div>
-          {{/if}}
         </div>
+        {{/if}}
       </div>
+      {{> chatInput}}
     </div>
     {{> loginButtons}}
   </div>
@@ -23,7 +22,7 @@
 
 
 <template name="chat">
-  {{> Received}}
+  {{> chatBody}}
   {{> chatInput}}
 </template>
 
@@ -31,9 +30,10 @@
 
     {{#each messages}}
       <p>{{username}} : {{text}}</p>
+      <p>{{ timestamp}}</p>
     {{/each}}
 
-  {{> chatInput}}
+
 </template>
 
 <template name="chatInput">

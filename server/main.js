@@ -24,10 +24,12 @@ Messages.remove({});
 // Uso function en lugar de arrow para hacer uso del this
 
 Meteor.publish('messages.server', function(limit) {
-
+// para usarios loggeados
+ if(this.userId){
   return Messages.find({}, {
-    limit: limit || 5,
+    limit: limit,
     sort: { timestamp: -1 }
   });
+}
   this.ready();
 });

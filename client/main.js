@@ -11,7 +11,9 @@ Meteor.subscribe('messages.server', 5);
 // Aqui defino el comportamiento que permite mostrar los mensajes
 Template.chatBody.helpers({
   messages: function() {
-    return Messages.find({});
+    return Messages.find({},{
+      sort: { timestamp: -1}
+    });
   }
 });
 
@@ -35,6 +37,7 @@ Template.chatInput.events({
     Messages.insert({
       text: text,
       timestamp: Date.now()
+
     });
   }
 });
