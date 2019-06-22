@@ -2,3 +2,17 @@ body {
   padding: 10px;
   font-family: sans-serif;
 }
+.scroll * {
+  overflow-anchor: none !important;
+}
+.scroll::after {
+  content: '';
+  display: block;
+  overflow-anchor: auto;
+  height: 1px;
+}
+
+#textMessage {
+  overflow-anchor: auto;
+  height: 1px;
+}

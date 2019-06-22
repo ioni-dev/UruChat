@@ -9,10 +9,10 @@ Meteor.subscribe('messages.server', 5);
 
 
 // Aqui defino el comportamiento que permite mostrar los mensajes
+// en el helper
 Template.chatBody.helpers({
   messages: function() {
     return Messages.find({},{
-      sort: { timestamp: -1}
     });
   }
 });
@@ -23,22 +23,17 @@ Template.chatInput.events({
   'submit .writeMessageForm': function (event) {
     event.preventDefault();
     let text = event.target.writeMessageInput.value;
-    console.log(text);
     // Aqui llamo al metodo del servidor y le paso el la variable
     // que contine el texto que escribe la persona
     Meteor.call('insertMessage', text, function(err, result){
       if(err) {
-        console.log(err.reason);
+        throw new Meteor.Error('message not found', "Can't find any message");
       } else {
-         console.log('sended by: ', result);
-         event.target.writeMessageInput.value = '';
+       event.target.writeMessageInput.value = ' ';
+
       }
     });
-    Messages.insert({
-      text: text,
-      timestamp: Date.now()
 
-    });
   }
 });
 

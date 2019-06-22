@@ -7,9 +7,11 @@ Meteor.startup(() => {
 });
 Meteor.methods({
   insertMessage: function(text) {
+    if(!this.userId){
+      alert("user not available");
+    }
     var user = Meteor.users.findOne(this.userId);
       // Inserto el mensaje
-    console.log(user)
     return Messages.insert({
       userId: this.userId,
       username: user.username,
@@ -20,16 +22,16 @@ Meteor.methods({
 });
 
 Messages.remove({});
-// Retornando el mongo cursor, esto esta disponible para el cliente
+// publish un set de records (nombre del set, callback)
 // Uso function en lugar de arrow para hacer uso del this
 
 Meteor.publish('messages.server', function(limit) {
 // para usarios loggeados
  if(this.userId){
-  return Messages.find({}, {
-    limit: limit,
-    sort: { timestamp: -1 }
+   return Messages.find({}, {
+      sort: { timestamp: -1 }
   });
 }
+// Llama al subscrie del cliente
   this.ready();
 });

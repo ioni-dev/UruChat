@@ -5,10 +5,10 @@
 <body>
   <div class="container">
     <div class="card">
-      <h5 class="card-header">{{username}}Here the name of the other person</h5>
-      <div class="card-body overflow-auto">
+      <h5 class="card-header"> UruChat</h5>
+      <div class="card-body">
         {{#if currentUser}}
-        <div style="height: 50vh;">
+        <div style="height: 50vh;  overflow-y: scroll;">
             {{> chatBody}}
         </div>
         {{/if}}
@@ -20,26 +20,22 @@
 
 </body>
 
-
-<template name="chat">
-  {{> chatBody}}
-  {{> chatInput}}
-</template>
-
 <template name="chatBody">
-
+   <div class="scroll">
     {{#each messages}}
-      <p>{{username}} : {{text}}</p>
-      <p>{{ timestamp}}</p>
+
+      <p id="textMessage">{{username}} : {{text}}</p>
+
     {{/each}}
 
+    </div>
 
 </template>
 
 <template name="chatInput">
-  <form class="writeMessageForm form-inline">
-    <div class="form-group mx-sm-3 mb-2">
-      <input type="text" name="writeMessageInput" class="form-control " aria-describedby="enterMessage"
+  <form class="writeMessageForm form-inline w-100">
+    <div class="form-group mx-sm-3 mb-2 w-75">
+      <input type="text" name="writeMessageInput" class="form-control w-100" aria-describedby="enterMessage"
         placeholder="Write your message" />
     </div>
     <button type="submit" class="btn btn-primary mb-2">Send</button>
