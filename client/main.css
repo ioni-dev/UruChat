@@ -1,9 +1,33 @@
+/* I used bootstrap to syle my application, but i needed some custom
+  modifications.
+ */
+
 body {
-  padding: 10px;
+  padding: 9vh;
   font-family: sans-serif;
 }
+/* Account message */
+.account{
+  margin: 30vh auto;
+  text-align: center;
+
+}
+.card-header{
+  background: white !important;
+  font-size: 4vh;
+  font-weight: bold;
+}
+.messageContainer{
+  height: 50vh;
+  margin-bottom: 20px;
+  overflow: scroll;
+}
+/* This is actually very important, because this is my solution when a user
+  sends a message this one will scroll down the chat box */
 .scroll * {
   overflow-anchor: none !important;
+  width: 90%;
+
 }
 .scroll::after {
   content: '';
@@ -14,5 +38,8 @@ body {
 
 #textMessage {
   overflow-anchor: auto;
-  height: 1px;
+
+}
+.active {
+  color: red;
 }

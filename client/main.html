@@ -4,37 +4,50 @@
 
 <body>
   <div class="container">
-    <div class="card">
+    <!-- Here i check if the user is currently logged in -->
+    {{#if currentUser}}
+    <div class="card shadow p-3 mb-5 bg-white rounded">
       <h5 class="card-header"> UruChat</h5>
       <div class="card-body">
-        {{#if currentUser}}
-        <div style="height: 50vh;  overflow-y: scroll;">
+        <div class="messageContainer">
             {{> chatBody}}
         </div>
-        {{/if}}
+        {{> chatInput}}
       </div>
-      {{> chatInput}}
     </div>
-    {{> loginButtons}}
+<!-- if not, then i will show this form that would make the usern
+      Login or Register -->
+
+    <!-- <div>
+      <h1> Please Login or Register to start using the chat</h1>
+      {{> loginButtons}}
+      </div> -->
+    {{/if}}
+    {{#unless currentUser}}
+    <div class="account container">
+      <h1 > Please Login or Register to start using the chat</h1>
+      {{> loginButtons}}
+      </div>
+    {{/unless}}
   </div>
-
 </body>
-
+<!-- This is the Template that contains the messages from the Collection
+      returned from the server through the client helper -->
 <template name="chatBody">
    <div class="scroll">
     {{#each messages}}
 
-      <p id="textMessage">{{username}} : {{text}}</p>
+          <p id="textMessage" class=" font-weight-light d-block p-2 bg-primary text-white shadow-sm rounded">{{username}} : {{text}}</p>
 
     {{/each}}
 
     </div>
 
 </template>
-
+<!-- Here i create the input, then i can capture the message from the user -->
 <template name="chatInput">
-  <form class="writeMessageForm form-inline w-100">
-    <div class="form-group mx-sm-3 mb-2 w-75">
+  <form class="writeMessageForm form-inline w-100 ">
+    <div class="form-group mx-sm-3 mb-2 w-75 vh-60" >
       <input type="text" name="writeMessageInput" class="form-control w-100" aria-describedby="enterMessage"
         placeholder="Write your message" />
     </div>
